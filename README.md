@@ -5,6 +5,8 @@ This Python-based exporter is designed to expose file sizes in a directory as Pr
 ## Features
 
 - **Update Frequency**: Monthly.
+- **Operating System**: Debian Bookworm (12) Slim.
+- **Timezone**: Europe/Berlin.
 
 - **File Pattern Matching**: The exporter can filter files based on a pattern, such as `*.gz` or `*.*`.
 - **File Size Metrics**: The exporter exposes the size of each file in bytes as a Prometheus gauge metric.
