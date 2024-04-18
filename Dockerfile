@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bullseye
+FROM python:3.11-slim-bookworm
 
 ENV USERNAME app
 ENV UID 1001
@@ -20,6 +20,13 @@ RUN pip install -r ${APP_ROOT}/requirements.txt \
 RUN addgroup ${USERNAME} --gid ${UID} \
     && adduser  ${USERNAME} --uid ${UID} --gid ${UID} --home ${USERHOME} --shell /bin/bash --no-create-home \
     && chown -R ${USERNAME}:${USERNAME} ${USERHOME}
+
+# TZ
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apt/archives/*
 
 USER ${USERNAME}:${USERNAME}
 WORKDIR ${APP_ROOT}
